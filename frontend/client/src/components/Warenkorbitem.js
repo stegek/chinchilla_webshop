@@ -47,6 +47,7 @@ export default function Warenkorbitem({
         {product.lagerstand > 0 ? "lieferbar" : "nicht auf Lager"}
       </p>
       <input
+        className="checkbox-warenkorb"
         type="checkbox"
         checked={isInWarenkorb}
         onChange={() => {

@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useReducer } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import "./styles.css";
 import Productgrid from "./components/Productgrid";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Warenkorb from "./components/Warenkorb";
 import Footer from "./components/Footer";
 import Payment from "./components/Payment";
 import PaymentButton from "./components/PaymentButton";
-import { createBrowserHistory as history } from "history";
+
 import Summary from "./components/Summary";
 import orderReducer from "./reducers/orderReducers";
 import FinalPage from "./components/FinalPage";
@@ -64,88 +65,75 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <div className="container">
         <Header />
-        <Router history={history}>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/warenkorb">Warenkorb</Link>
-              </li>
-            </ul>
-          </nav>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Productgrid
-                  products={products}
-                  warenkorb={warenkorb}
-                  toggleWarenkorb={toggleWarenkorb}
-                  dispatch={dispatch}
-                />
-              }
-            />
-            <Route
-              path="/warenkorb"
-              element={
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Productgrid
+                products={products}
+                warenkorb={warenkorb}
+                toggleWarenkorb={toggleWarenkorb}
+                dispatch={dispatch}
+              />
+            }
+          />
+          <Route
+            path="/warenkorb"
+            element={
+              <div>
                 <div>
+                  <Warenkorb
+                    products={products}
+                    warenkorb={warenkorb}
+                    toggleWarenkorb={toggleWarenkorb}
+                    orders={state.orders}
+                    dispatch={dispatch}
+                  />
+                </div>
+                {warenkorb.length > 0 && (
                   <div>
-                    <Warenkorb
-                      products={products}
-                      warenkorb={warenkorb}
-                      toggleWarenkorb={toggleWarenkorb}
-                      orders={state.orders}
-                      dispatch={dispatch}
-                    />
+                    <PaymentButton link={"/payment"} buttonInfo={"Zur Kasse"} />
                   </div>
-                  {warenkorb.length > 0 && (
-                    <div>
-                      <PaymentButton
-                        link={"/payment"}
-                        buttonInfo={"Zur Kasse"}
-                      />
-                    </div>
-                  )}
-                </div>
-              }
-            />
-            <Route
-              path="/payment"
-              element={
-                <div>
-                  <Payment
-                    payment={payment}
-                    changePayment={changePayment}
-                    user={user}
-                    setUser={setUser}
-                  />
-                  <PaymentButton
-                    link={"/summary"}
-                    buttonInfo={"Zur Bestellübersicht"}
-                  />
-                </div>
-              }
-            />
-            <Route
-              path="/summary"
-              element={
-                <Summary
-                  products={products}
-                  warenkorb={warenkorb}
+                )}
+              </div>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <div>
+                <Payment
                   payment={payment}
-                  orders={state.orders}
+                  changePayment={changePayment}
                   user={user}
-                  reset={resetOrderProcess}
+                  setUser={setUser}
                 />
-              }
-            />
-            <Route path="/final" element={<FinalPage payment={payment} />} />
-          </Routes>
-        </Router>
+                <PaymentButton
+                  link={"/summary"}
+                  buttonInfo={"Zur Bestellübersicht"}
+                />
+              </div>
+            }
+          />
+          <Route
+            path="/summary"
+            element={
+              <Summary
+                products={products}
+                warenkorb={warenkorb}
+                payment={payment}
+                orders={state.orders}
+                user={user}
+                reset={resetOrderProcess}
+              />
+            }
+          />
+          <Route path="/final" element={<FinalPage payment={payment} />} />
+        </Routes>
       </div>
       <Footer />
     </div>

@@ -4,13 +4,15 @@
 }
 
 body{
-    background-color: #121212;
+    background-color: #141414;
     color:#fff;
+    
 }
 
 .container{
     width: 70%;
     margin: 0 auto;
+    
        
 }
 
@@ -29,10 +31,20 @@ body{
     object-fit: fill;
 }
 
+.route-img{
+    
+    overflow: hidden;
+    width: 30px;  
+}
+
 h1{
     font-size: 50px;
     text-align: center;
     padding-top: 70px;
+}
+
+h2{
+    margin: 10px 0;
 }
 
 .search-input{
@@ -42,26 +54,43 @@ h1{
     font-size: 17px;
 }
 
+
+
 ul{
+    background-color: #121212;
     list-style-type: none;
-    display: flex;
-    justify-content: center;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(8, auto); 
+    justify-items: center;
+    align-items: center;
+
     
 }
 
+
 li{
-    padding: 20px;
-    margin: 20px 0;
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.nav-item:hover{
+    background-color: #f3ecec;
+    color: #121212;
+    border-radius: 10px;
+
 }
 
 nav a{
-    text-decoration: none;
-    font-size: 20px;
+    
     background-color: #fff;
     color: #121212;
-    padding: 20px;
-    margin:20px 0;
-    border-radius: 50px;
+    padding: 15px 5px 5px 5px ;
+    margin:40px 0;
+    border-radius: 10px;
+    
 }
 
 nav a:hover{
@@ -75,6 +104,7 @@ nav a:hover{
     gap: 2rem 2rem;
     padding: 1rem;
     justify-content: center;
+    
 }
 
 .product-card{
@@ -85,6 +115,7 @@ nav a:hover{
     max-height: 400px;
     background-color: #615b5b;
     border-radius: 10px;
+    
     
 
 
@@ -128,13 +159,21 @@ nav a:hover{
 
     display: grid;
     border: 1px solid grey;
+    border-radius: 10px;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(7, 1fr);
     gap:20px 0;
     font-size: 17px;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease-in-out;
+    margin: 10px 0;
+    background-color: rgb(114, 110, 110);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0, .5);
+    
+}
+
+.checkbox-warenkorb{
+    width: 15px;
 }
 
 
@@ -143,6 +182,8 @@ nav a:hover{
     height: 50px;
     max-width: 100px;
     font-size: 25px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .productimage-warenkorb{
@@ -153,6 +194,7 @@ nav a:hover{
     margin: 20px;
     object-fit: cover;
     background-color: #fff;
+    transition: transform 0.2s ease-in-out;
 }
 
 .productimage-warenkorb:hover{
@@ -171,6 +213,13 @@ nav a:hover{
 .user-data{
     margin: 20px auto;
     
+}
+
+.payment-button{
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-size: 17px;
 }
 
 .final-img{

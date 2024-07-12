@@ -11,7 +11,9 @@ export default function PaymentButton({ link, buttonInfo }) {
 
   return (
     <div>
-      <button onClick={handleClick}>{buttonInfo}</button>
+      <button className="payment-button" onClick={handleClick}>
+        {buttonInfo}
+      </button>
     </div>
   );
 }

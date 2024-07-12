@@ -12,9 +12,9 @@ export default function Warenkorb({
   return (
     <div>
       {warenkorb.length !== 0 ? (
-        <h1>Warenkorb</h1>
+        <h2>Warenkorb</h2>
       ) : (
-        <h1>Warenkorb ist leer</h1>
+        <h2>Warenkorb ist leer</h2>
       )}
       <div className="warenkorb">
         {warenkorb.map((id) => {
