@@ -89,10 +89,7 @@ li{
 
 
 
-.navbar-cart a:hover{
-    background-color: #f3ecec;
-    color: #121212;
-}
+
 
 .product-grid{
     display: grid;
