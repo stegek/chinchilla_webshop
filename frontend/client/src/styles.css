@@ -34,7 +34,11 @@ body{
 .route-img{
     
     overflow: hidden;
-    width: 30px;  
+    width: 50px;  
+}
+
+.home-img{
+    width: 70px;
 }
 
 h1{
@@ -83,17 +87,9 @@ li{
 
 }
 
-nav a{
-    
-    background-color: #fff;
-    color: #121212;
-    padding: 15px 5px 5px 5px ;
-    margin:40px 0;
-    border-radius: 10px;
-    
-}
 
-nav a:hover{
+
+.navbar-cart a:hover{
     background-color: #f3ecec;
     color: #121212;
 }
