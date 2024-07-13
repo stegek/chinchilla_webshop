@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Productitem from "./Productitem";
 
 export default function Productgrid({
@@ -11,7 +11,9 @@ export default function Productgrid({
   const searchStateValue = searchState.searchState;
 
   const matchSearchTerm = (product, searchStateValue) => {
-    return product.name.toLowerCase().includes(searchStateValue.toLowerCase());
+    return searchStateValue
+      ? product.name.toLowerCase().includes(searchStateValue.toLowerCase())
+      : product.name.toLowerCase();
   };
 
   const filteredProducts = products.filter((product) =>
