@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useReducer } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
 import "./styles.css";
 import Productgrid from "./components/Productgrid";
@@ -46,6 +47,8 @@ function App() {
       .then((data) => setProducts(JSON.parse(data)));
   }, [products]);
 
+  const carouselImages = ["hausmesse.jpg", "lieferkosten.jpg"];
+
   const toggleWarenkorb = (productId, order) => {
     setWarenkorb((prev) =>
       prev.includes(productId)
@@ -75,7 +78,7 @@ function App() {
     <div className="App">
       <Navbar searchDispatch={searchDispatch} />
       <div className="container">
-        <Header />
+        <Carousel images={carouselImages} />
 
         <Routes>
           <Route

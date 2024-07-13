@@ -31,7 +31,9 @@ export default function Navbar({ searchDispatch }) {
           ></input>
         </li>
         <li className="nav-item">dummy5</li>
-        <li className="nav-item">dummy6</li>
+        <li>
+          <img className="route-img" src="logIn.png" alt="log-in" />
+        </li>
 
         <li className="navbar-cart">
           <Link to="/warenkorb">
