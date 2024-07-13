@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ searchDispatch }) {
   const [navSearch, setNavSearch] = useState("");
 
   const handleNavSearch = (e) => {
+    const inputValue = e.target.value;
+    searchDispatch({ type: "INPUT", payload: inputValue });
     setNavSearch(e.target.value);
   };
 

@@ -12,6 +12,7 @@ import PaymentButton from "./components/PaymentButton";
 
 import Summary from "./components/Summary";
 import orderReducer from "./reducers/orderReducers";
+import searchReducer from "./reducers/searchReducer";
 import FinalPage from "./components/FinalPage";
 
 function App() {
@@ -31,6 +32,13 @@ function App() {
   };
 
   const [state, dispatch] = useReducer(orderReducer, initialState);
+
+  const searchInitialState = "";
+
+  const [searchState, searchDispatch] = useReducer(
+    searchReducer,
+    searchInitialState
+  );
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -65,7 +73,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar searchDispatch={searchDispatch} />
       <div className="container">
         <Header />
 
@@ -78,6 +86,7 @@ function App() {
                 warenkorb={warenkorb}
                 toggleWarenkorb={toggleWarenkorb}
                 dispatch={dispatch}
+                searchState={searchState}
               />
             }
           />

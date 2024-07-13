@@ -6,30 +6,20 @@ export default function Productgrid({
   warenkorb,
   toggleWarenkorb,
   dispatch,
+  searchState,
 }) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchStateValue = searchState.searchState;
 
-  const handleSearchTerm = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const matchSearchTerm = (product, searchTerm) => {
-    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  const matchSearchTerm = (product, searchStateValue) => {
+    return product.name.toLowerCase().includes(searchStateValue.toLowerCase());
   };
 
   const filteredProducts = products.filter((product) =>
-    matchSearchTerm(product, searchTerm)
+    matchSearchTerm(product, searchStateValue)
   );
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Enter productname ..."
-        value={searchTerm}
-        onChange={handleSearchTerm}
-        className="search-input"
-      ></input>
       <div className="product-grid">
         {filteredProducts.map((product) => {
           return (
