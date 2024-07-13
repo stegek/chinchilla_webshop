@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
 import "./App.css";
-import Header from "./components/Header";
 import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
 import "./styles.css";
@@ -49,7 +48,7 @@ function App() {
 
   const carouselImages = ["hausmesse.jpg", "lieferkosten.jpg"];
 
-  const toggleWarenkorb = (productId, order) => {
+  const toggleWarenkorb = (productId) => {
     setWarenkorb((prev) =>
       prev.includes(productId)
         ? prev.filter((id) => id !== productId)

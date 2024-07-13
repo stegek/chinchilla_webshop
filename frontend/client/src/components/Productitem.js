@@ -17,7 +17,7 @@ export default function Productitem({
       menge: 1,
       total: 1 * preis,
     };
-    toggleWarenkorb(product.id, order);
+    toggleWarenkorb(product.id);
     isInWarenkorb
       ? dispatch({ type: "REMOVE", payload: { id } })
       : dispatch({ type: "ADD", payload: order });
