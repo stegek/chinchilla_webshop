@@ -15,7 +15,13 @@ export default function Navbar({ searchDispatch }) {
       <ul>
         <li>
           <Link to="/">
-            <img className="home-img" src="homechin.png" alt="home" />
+            <img
+              className="home-img"
+              src="homechin.png"
+              alt="home"
+              onMouseOver={(e) => (e.currentTarget.src = "homechinHover.png")}
+              onMouseOut={(e) => (e.currentTarget.src = "homechin.png")}
+            />
           </Link>
         </li>
         <li className="nav-item">dummy1</li>
@@ -32,12 +38,24 @@ export default function Navbar({ searchDispatch }) {
         </li>
         <li className="nav-item">dummy5</li>
         <li>
-          <img className="route-img" src="logIn.png" alt="log-in" />
+          <img
+            className="route-img"
+            src="logIn.png"
+            alt="log-in"
+            onMouseOver={(e) => (e.currentTarget.src = "logInHover.png")}
+            onMouseOut={(e) => (e.currentTarget.src = "logIn.png")}
+          />
         </li>
 
         <li className="navbar-cart">
           <Link to="/warenkorb">
-            <img className="route-img" src="whitecart.png" alt="cart" />
+            <img
+              className="route-img"
+              src="cart.png"
+              alt="cart"
+              onMouseOver={(e) => (e.currentTarget.src = "cartHover.png")}
+              onMouseOut={(e) => (e.currentTarget.src = "cart.png")}
+            />
           </Link>
         </li>
       </ul>

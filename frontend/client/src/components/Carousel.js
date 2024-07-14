@@ -9,11 +9,11 @@ export default function Carousel({ images, interval = 5000 }) {
     );
   };
 
-  const prevSlide = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+  //   const prevSlide = () => {
+  //     setActiveIndex((prevIndex) =>
+  //       prevIndex === 0 ? images.length - 1 : prevIndex - 1
+  //     );
+  //   };
 
   useEffect(() => {
     const autoPlayInterval = setInterval(nextSlide, interval);
