@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const handleCredentials = (e) => {
+    const { value, name } = e.target;
+
+    setCredentials((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
   return (
     <div>
       <div className="login-container">
@@ -13,12 +23,16 @@ export default function Login() {
               placeholder="E-Mail Adresse eingeben..."
               type="text"
               name="email"
+              onChange={handleCredentials}
+              value={credentials.email}
             />{" "}
             <br />
             <input
               placeholder="Password eingeben..."
               type="text"
               name="password"
+              onChange={handleCredentials}
+              value={credentials.password}
             />{" "}
             <br />
             <input type="submit" value="Abschicken" />

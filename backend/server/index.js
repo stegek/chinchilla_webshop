@@ -3,9 +3,13 @@ import env from "dotenv";
 import pg from "pg";
 import bodyParser from "body-parser";
 import cors from "cors";
+import passport from "passport";
+import { Strategy } from "passport-local";
+import bcrypt from "bcrypt";
 
 const app = express();
 const port = 5000;
+const saltRounds = 10;
 env.config();
 
 const db = new pg.Client({
@@ -22,6 +26,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(passport.initialize());
 
 app.get("/products", async (req, res) => {
   try {
@@ -79,6 +84,42 @@ app.post("/saveOrder", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(500).send("Internal Server Error");
+  }
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const { email, password, password2 } = req.body;
+
+    const checkResult = await db.query(
+      "select * from credentials where user_name = $1 ",
+      [email]
+    );
+
+    if (checkResult.rows.length > 0) {
+      res.send("Bereits registriert, bitte einloggen");
+    } else {
+      if (password !== password2) {
+        res.send("Passwörter stimmen nicht überein");
+      } else {
+        bcrypt.hash(password, saltRounds, async (err, hash) => {
+          if (err) {
+            console.log("Error while hashing password");
+          } else {
+            const result = await db.query(
+              "insert into credentials (user_name, pw) values ($1, $2) RETURNING *",
+              [email, hash]
+            );
+
+            const user = result.rows[0];
+
+            res.send({ user: user });
+          }
+        });
+      }
+    }
+  } catch (err) {
+    res.send(err);
   }
 });
 
