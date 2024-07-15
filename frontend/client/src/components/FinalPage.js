@@ -2,7 +2,6 @@ import React from "react";
 import "../styles.css";
 
 export default function FinalPage(payment) {
-  console.log(payment.payment);
   return (
     <div>
       <h2>
