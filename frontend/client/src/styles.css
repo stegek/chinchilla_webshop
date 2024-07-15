@@ -149,8 +149,27 @@ li{
     color: red;
 }
 
+.login-container, .register-container{
+    
+    width: 50%;
+    margin: 50px auto auto auto;   
+       
+}
 
+.login, .register{
+    background-color: #fff;
+    color: #121212;
+    padding: 20px 0 40px 0;
+    border-radius: 5px;      
+    
+}
 
+.login input, .register input{
+    padding: 10px 0;
+    margin: 10px 0;
+    width: 50%;
+    border-radius: 10px;
+}
 
 .warenkorb-card, .summary-card{
 

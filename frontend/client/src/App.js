@@ -2,6 +2,8 @@ import React, { useEffect, useState, useReducer } from "react";
 import "./App.css";
 import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import "./styles.css";
 import Productgrid from "./components/Productgrid";
 import { Routes, Route } from "react-router-dom";
@@ -92,6 +94,8 @@ function App() {
               />
             }
           />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/warenkorb"
             element={

@@ -38,13 +38,15 @@ export default function Navbar({ searchDispatch }) {
         </li>
         <li className="nav-item">dummy5</li>
         <li>
-          <img
-            className="route-img"
-            src="logIn.png"
-            alt="log-in"
-            onMouseOver={(e) => (e.currentTarget.src = "logInHover.png")}
-            onMouseOut={(e) => (e.currentTarget.src = "logIn.png")}
-          />
+          <Link to="/login">
+            <img
+              className="route-img"
+              src="logIn.png"
+              alt="log-in"
+              onMouseOver={(e) => (e.currentTarget.src = "logInHover.png")}
+              onMouseOut={(e) => (e.currentTarget.src = "logIn.png")}
+            />
+          </Link>
         </li>
 
         <li className="navbar-cart">
