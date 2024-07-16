@@ -3,8 +3,7 @@ import env from "dotenv";
 import pg from "pg";
 import bodyParser from "body-parser";
 import cors from "cors";
-import passport from "passport";
-import { Strategy } from "passport-local";
+
 import bcrypt from "bcrypt";
 
 const app = express();
@@ -26,7 +25,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(passport.initialize());
 
 app.get("/products", async (req, res) => {
   try {
@@ -91,44 +89,81 @@ app.post("/register", async (req, res) => {
   try {
     const { email, password, password2 } = req.body;
 
-    const checkResult = await db.query(
-      "select * from credentials where user_name = $1 ",
-      [email]
-    );
-
-    if (checkResult.rows.length > 0) {
+    if (email.length === 0 || password.length < 10) {
       res.json({
-        message: "Bereits registriert, bitte einloggen",
-        result: false,
+        message: "Keine E-Mail Adresse eingegeben oder Passwort zu kurz",
       });
     } else {
-      if (password !== password2) {
+      const checkResult = await db.query(
+        "select * from credentials where user_name = $1 ",
+        [email]
+      );
+
+      if (checkResult.rows.length > 0) {
         res.json({
-          message: "Passwörter stimmen nicht überein",
+          message: "Bereits registriert, bitte einloggen",
           result: false,
         });
       } else {
-        bcrypt.hash(password, saltRounds, async (err, hash) => {
-          if (err) {
-            console.json({
-              message: "Fehler beim Verschluesseln",
-              result: false,
-            });
-          } else {
-            const result = await db.query(
-              "insert into credentials (user_name, pw) values ($1, $2) RETURNING *",
-              [email, hash]
-            );
+        if (password !== password2) {
+          res.json({
+            message: "Passwörter stimmen nicht überein",
+            result: false,
+          });
+        } else {
+          bcrypt.hash(password, saltRounds, async (err, hash) => {
+            if (err) {
+              console.json({
+                message: "Fehler beim Verschluesseln",
+                result: false,
+              });
+            } else {
+              const result = await db.query(
+                "insert into credentials (user_name, pw) values ($1, $2) RETURNING *",
+                [email, hash]
+              );
 
-            const user = result.rows[0];
-            const data = JSON.stringify(user);
-            res.json({ message: "Registrierung erfolgreich", result: true });
-          }
-        });
+              const user = result.rows[0];
+              const data = JSON.stringify(user);
+              res.json({ message: "Registrierung erfolgreich", result: true });
+            }
+          });
+        }
       }
     }
   } catch (err) {
     res.send(err);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user_check = await db.query(
+      "select * from credentials where user_name = $1 ",
+      [email]
+    );
+
+    if (user_check.rows.length > 0) {
+      const saved_pw = user_check.rows[0].pw;
+
+      bcrypt.compare(password, saved_pw, (err, result) => {
+        if (err) {
+          res.json({ message: err });
+        } else {
+          if (result) {
+            res.json({ message: "Login erfolgreich" });
+          } else {
+            res.json({ message: "Falsches Passwort" });
+          }
+        }
+      });
+    } else {
+      res.json({ message: "Benutzer nicht gefunden" });
+    }
+  } catch (err) {
+    res.json({ message: err });
   }
 });
 

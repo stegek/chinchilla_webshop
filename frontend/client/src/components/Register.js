@@ -41,6 +41,7 @@ export default function Register() {
       <div className="register-container">
         <div className="register">
           <h2>Registrierung</h2>
+          <h4>(Passwort min. 10 Zeichen)</h4>
 
           <form>
             <input

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const [loginData, setLoginData] = useState([]);
 
   const handleCredentials = (e) => {
     const { value, name } = e.target;
@@ -10,6 +13,24 @@ export default function Login() {
     setCredentials((prev) => {
       return { ...prev, [name]: value };
     });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const bodyData = JSON.stringify(credentials);
+
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: bodyData,
+    })
+      .then((response) => response.json())
+      .then((data) => setLoginData(data))
+      .catch((error) => console.log(error));
+
+    // setCredentials((prev) => {
+    //   return { ...prev, password: "" };
+    // });
   };
 
   return (
@@ -29,13 +50,27 @@ export default function Login() {
             <br />
             <input
               placeholder="Password eingeben..."
-              type="text"
+              type="password"
               name="password"
               onChange={handleCredentials}
               value={credentials.password}
             />
             <br />
-            <input className="submit" type="submit" value="Abschicken" />
+            {loginData && (
+              <p
+                className={
+                  loginData.message === "Login erfolgreich" ? "true" : "false"
+                }
+              >
+                {loginData.message}
+              </p>
+            )}
+            <input
+              className="submit"
+              type="submit"
+              value="Abschicken"
+              onClick={(e) => handleLogin(e)}
+            />
           </form>
 
           <p>Neu bei Chinshop? </p>
