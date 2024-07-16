@@ -7,11 +7,32 @@ export default function Register() {
     password2: "",
   });
 
+  const [registerInfo, setRegisterInfo] = useState([]);
+
   const handleRegisterData = (e) => {
     const { value, name } = e.target;
 
     setRegisterData((prev) => {
       return { ...prev, [name]: value };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const bodyData = JSON.stringify(registerData);
+    fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: bodyData,
+    })
+      .then((response) => response.json())
+      .then((data) => setRegisterInfo(data))
+      .catch((error) => console.log(error));
+
+    setRegisterData({
+      email: "",
+      password: "",
+      password2: "",
     });
   };
 
@@ -28,7 +49,7 @@ export default function Register() {
               name="email"
               onChange={handleRegisterData}
               value={registerData.email}
-            />{" "}
+            />
             <br />
             <input
               placeholder="Password eingeben..."
@@ -46,7 +67,18 @@ export default function Register() {
               value={registerData.password2}
             />
             <br />
-            <input type="submit" value="Abschicken" />
+            {registerInfo && (
+              <p className={registerInfo.result === true ? "true" : "false"}>
+                {registerInfo.message}
+              </p>
+            )}
+
+            <input
+              className="submit"
+              type="submit"
+              value="Abschicken"
+              onClick={(e) => handleSubmit(e)}
+            />
           </form>
         </div>
       </div>

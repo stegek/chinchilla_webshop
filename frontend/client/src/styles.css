@@ -141,12 +141,12 @@ li{
     padding: 10px;
 }
 
-.lieferbar{
+.lieferbar, .true{
     color: rgb(145, 226, 145);
 }
 
-.nicht-lieferbar{
-    color: red;
+.nicht-lieferbar, .false{
+    color: rgb(252, 0, 0);
 }
 
 .login-container, .register-container{
@@ -157,8 +157,9 @@ li{
 }
 
 .login, .register{
-    background-color: #fff;
-    color: #121212;
+    background-color: rgb(114, 110, 110);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0, .5);
+    color: #000000;
     padding: 20px 0 40px 0;
     border-radius: 5px;      
     
@@ -169,6 +170,11 @@ li{
     margin: 10px 0;
     width: 50%;
     border-radius: 10px;
+}
+
+.submit:hover{
+    background-color: #615b5b;
+    color: #fff;
 }
 
 .warenkorb-card, .summary-card{

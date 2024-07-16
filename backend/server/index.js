@@ -97,14 +97,23 @@ app.post("/register", async (req, res) => {
     );
 
     if (checkResult.rows.length > 0) {
-      res.send("Bereits registriert, bitte einloggen");
+      res.json({
+        message: "Bereits registriert, bitte einloggen",
+        result: false,
+      });
     } else {
       if (password !== password2) {
-        res.send("Passwörter stimmen nicht überein");
+        res.json({
+          message: "Passwörter stimmen nicht überein",
+          result: false,
+        });
       } else {
         bcrypt.hash(password, saltRounds, async (err, hash) => {
           if (err) {
-            console.log("Error while hashing password");
+            console.json({
+              message: "Fehler beim Verschluesseln",
+              result: false,
+            });
           } else {
             const result = await db.query(
               "insert into credentials (user_name, pw) values ($1, $2) RETURNING *",
@@ -112,8 +121,8 @@ app.post("/register", async (req, res) => {
             );
 
             const user = result.rows[0];
-
-            res.send({ user: user });
+            const data = JSON.stringify(user);
+            res.json({ message: "Registrierung erfolgreich", result: true });
           }
         });
       }

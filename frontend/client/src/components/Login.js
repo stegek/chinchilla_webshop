@@ -33,9 +33,9 @@ export default function Login() {
               name="password"
               onChange={handleCredentials}
               value={credentials.password}
-            />{" "}
+            />
             <br />
-            <input type="submit" value="Abschicken" />
+            <input className="submit" type="submit" value="Abschicken" />
           </form>
 
           <p>Neu bei Chinshop? </p>
