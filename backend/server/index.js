@@ -40,7 +40,7 @@ app.get("/products", async (req, res) => {
 app.post("/saveOrder", async (req, res) => {
   try {
     const data = req.body;
-    const { orderdata, paymentdata, userdata } = data;
+    const { orderdata, paymentdata, userdata, loguser } = data;
 
     const oid = await db.query("select count(*) from orders");
     let ordernumber = parseInt(oid.rows[0].count) + 1;
@@ -64,7 +64,7 @@ app.post("/saveOrder", async (req, res) => {
 
     for (const order of orderdata) {
       const savedata = await db.query(
-        "insert into orders (cid, oid, pid, menge, einzelpreis, zahlungsmethode, datum) values ($1, $2, $3, $4, $5, $6, $7) returning *",
+        "insert into orders (cid, oid, pid, menge, einzelpreis, zahlungsmethode, datum, user_name) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *",
         [
           customernumber,
           ordernumber,
@@ -73,6 +73,7 @@ app.post("/saveOrder", async (req, res) => {
           order.preis,
           paymentdata,
           orderdate,
+          loguser,
         ]
       );
       console.log(savedata);
@@ -148,12 +149,22 @@ app.post("/login", async (req, res) => {
     if (user_check.rows.length > 0) {
       const saved_pw = user_check.rows[0].pw;
 
-      bcrypt.compare(password, saved_pw, (err, result) => {
+      bcrypt.compare(password, saved_pw, async (err, result) => {
         if (err) {
           res.json({ message: err });
         } else {
           if (result) {
-            res.json({ message: "Login erfolgreich" });
+            const orders = await db.query(
+              "select datum, oid,sum(menge) as Artikelanzahl_gesamt, sum(einzelpreis*menge) as Gesamtsumme, user_name from orders where user_name = $1 group by datum, oid,user_name",
+              [email]
+            );
+
+            const user_data = orders.rows;
+            res.json({
+              message: "Login erfolgreich",
+              uid: email,
+              data: user_data,
+            });
           } else {
             res.json({ message: "Falsches Passwort" });
           }
@@ -164,6 +175,22 @@ app.post("/login", async (req, res) => {
     }
   } catch (err) {
     res.json({ message: err });
+  }
+});
+
+app.post("/order", async (req, res) => {
+  try {
+    const oid = req.body.oid;
+
+    const result = await db.query(
+      "select * from orders o, productdata p where o.pid =p.id and o.oid = $1",
+      [oid]
+    );
+    const data = result.rows;
+
+    res.json({ data: data });
+  } catch (err) {
+    res.send(err);
   }
 });
 

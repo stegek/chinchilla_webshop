@@ -4,6 +4,8 @@ import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Usercenter from "./components/Usercenter";
+import Orderview from "./components/Orderview";
 import "./styles.css";
 import Productgrid from "./components/Productgrid";
 import { Routes, Route } from "react-router-dom";
@@ -19,6 +21,7 @@ import FinalPage from "./components/FinalPage";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [loginData, setLoginData] = useState([]);
   const [warenkorb, setWarenkorb] = useState([]);
   const [payment, setPayment] = useState("Vorkasse");
   const [user, setUser] = useState({
@@ -77,7 +80,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar searchDispatch={searchDispatch} />
+      <Navbar searchDispatch={searchDispatch} user_name={loginData.uid} />
       <div className="container">
         <Carousel images={carouselImages} />
 
@@ -94,8 +97,24 @@ function App() {
               />
             }
           />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login loginData={loginData} setLoginData={setLoginData} />
+            }
+          />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/user"
+            element={
+              <Usercenter
+                user_name={loginData.uid}
+                setUser={setLoginData}
+                user_data={loginData.data}
+              />
+            }
+          />
+          <Route path="/orderview" element={<Orderview />} />
           <Route
             path="/warenkorb"
             element={
@@ -144,6 +163,7 @@ function App() {
                 orders={state.orders}
                 user={user}
                 reset={resetOrderProcess}
+                logUser={loginData.uid}
               />
             }
           />

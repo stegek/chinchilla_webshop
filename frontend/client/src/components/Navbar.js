@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ searchDispatch }) {
+export default function Navbar({ searchDispatch, user_name }) {
   const [navSearch, setNavSearch] = useState("");
 
   const handleNavSearch = (e) => {
@@ -38,7 +38,7 @@ export default function Navbar({ searchDispatch }) {
         </li>
         <li className="nav-item">dummy5</li>
         <li>
-          <Link to="/login">
+          <Link to={user_name ? "/user" : "/login"}>
             <img
               className="route-img"
               src="logIn.png"

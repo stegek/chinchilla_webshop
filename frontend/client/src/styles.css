@@ -9,6 +9,8 @@ body{
     
 }
 
+
+
 .container{
     width: 70%;
     margin: 0 auto;
@@ -194,6 +196,44 @@ li{
     
 }
 
+.usercenter-card{
+
+    display: grid;
+    border: 1px solid grey;
+    border-radius: 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px 0;
+    font-size: 17px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    background-color: rgb(114, 110, 110);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0, .5);
+    
+}
+
+.orderview-card{
+
+    display: grid;
+    border: 1px solid grey;
+    border-radius: 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    gap:20px 0;
+    font-size: 17px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    background-color: rgb(114, 110, 110);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0, .5);
+    
+}
+
+.userheader{
+    font-weight: bold;
+}
+
 .checkbox-warenkorb{
     width: 15px;
 }
@@ -242,6 +282,11 @@ li{
     border-radius: 10px;
     margin: 10px 0;
     font-size: 17px;
+}
+
+.payment-button:hover{
+    background-color: #615b5b;
+    color: #fff;
 }
 
 .final-img{

@@ -10,6 +10,7 @@ export default function Summary({
   orders,
   user,
   reset,
+  logUser,
 }) {
   let navigate = useNavigate();
 
@@ -20,6 +21,7 @@ export default function Summary({
       orderdata: orders,
       paymentdata: payment,
       userdata: user,
+      loguser: logUser,
     };
 
     saveData(finalOrder);
@@ -42,7 +44,9 @@ export default function Summary({
       <div>
         <p>{payment}</p>
       </div>
-      <button onClick={handleSubmit}>Bestellung abschicken</button>
+      <button className="payment-button" onClick={handleSubmit}>
+        Bestellung abschicken
+      </button>
     </div>
   );
 }

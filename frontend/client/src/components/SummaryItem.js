@@ -14,7 +14,7 @@ export default function SummaryItem({ product, order }) {
         {product.mengenanzahl} {product.mengeneinheit}
       </p>
       <p>{product.preis} €</p>
-      <p>ordermenge: {order.menge}</p>
+      <p>Bestellmenge: {order.menge}</p>
       <p>{order.total} €</p>
 
       <p

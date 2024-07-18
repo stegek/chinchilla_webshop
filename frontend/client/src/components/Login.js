@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ loginData, setLoginData }) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const [loginData, setLoginData] = useState([]);
+  let navigate = useNavigate();
 
   const handleCredentials = (e) => {
     const { value, name } = e.target;
@@ -27,11 +27,13 @@ export default function Login() {
       .then((response) => response.json())
       .then((data) => setLoginData(data))
       .catch((error) => console.log(error));
-
-    // setCredentials((prev) => {
-    //   return { ...prev, password: "" };
-    // });
   };
+
+  useEffect(() => {
+    if (loginData.uid) {
+      navigate("/user");
+    }
+  }, [loginData]);
 
   return (
     <div>
