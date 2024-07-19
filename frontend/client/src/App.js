@@ -169,8 +169,8 @@ function App() {
           />
           <Route path="/final" element={<FinalPage payment={payment} />} />
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

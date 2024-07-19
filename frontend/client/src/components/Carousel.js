@@ -24,7 +24,11 @@ export default function Carousel({ images, interval = 5000 }) {
 
   return (
     <div className="carousel">
-      <img src={images[activeIndex]} alt={`Slide ${activeIndex}`}></img>
+      <img
+        className="carousel-img"
+        src={images[activeIndex]}
+        alt={`Slide ${activeIndex}`}
+      ></img>
     </div>
   );
 }

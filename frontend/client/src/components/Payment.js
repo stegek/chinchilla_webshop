@@ -22,7 +22,7 @@ export default function Payment({ payment, changePayment, user, setUser }) {
 
   return (
     <div>
-      <h1>Payment and Delivery</h1>
+      <h2>Zahlungsmethoden und Lieferadresse</h2>
       <div>
         <fieldset
           value={payment}
@@ -58,45 +58,49 @@ export default function Payment({ payment, changePayment, user, setUser }) {
       <div className="user-data">
         <fieldset>
           <legend>Geben Sie bitte die Lieferdaten ein:</legend>
-          <div>
-            <label for="firstname">Vorname</label>
+          <div className="delivery-box">
             <input
               type="text"
               value={user.firstname}
               onChange={handleInput}
               name="firstname"
+              placeholder="Vorname"
             />
-            <label for="lastname">Nachname</label>
+          </div>
+          <div className="delivery-box">
             <input
               type="text"
               value={user.lastname}
               onChange={handleInput}
               name="lastname"
+              placeholder="Nachname"
             />
           </div>
-          <div>
-            <label for="adress">Adresse</label>
+          <div className="delivery-box">
             <input
               type="text"
               value={user.adress}
               onChange={handleInput}
               name="adress"
+              placeholder="Strasse und Hausnummer"
             />
           </div>
-          <div>
-            <label for="zip">PLZ</label>
+          <div className="delivery-box">
             <input
               type="text"
               value={user.zip}
               onChange={handleInput}
               name="zip"
+              placeholder="Postleitzahl"
             />
-            <label for="city">Ort</label>
+          </div>
+          <div className="delivery-box">
             <input
               type="text"
               value={user.city}
               onChange={handleInput}
               name="city"
+              placeholder="Ort"
             />
           </div>
         </fieldset>

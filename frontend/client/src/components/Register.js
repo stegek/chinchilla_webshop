@@ -54,7 +54,7 @@ export default function Register() {
             <br />
             <input
               placeholder="Password eingeben..."
-              type="text"
+              type="password"
               name="password"
               onChange={handleRegisterData}
               value={registerData.password}
@@ -62,7 +62,7 @@ export default function Register() {
             <br />
             <input
               placeholder="Password wiederholen..."
-              type="text"
+              type="password"
               name="password2"
               onChange={handleRegisterData}
               value={registerData.password2}

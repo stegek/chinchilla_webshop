@@ -18,10 +18,11 @@ export default function Usercenter({ user_name, setUser, user_data }) {
 
   return (
     <div>
-      <h1>{user_name}</h1>
+      <h1 className="usercenter-header">{user_name}</h1>
+      <br />
       <p>(Für Detailinfo auf Bestellung klicken)</p>
 
-      <div className="usercenter-card userheader">
+      <div className="userheader">
         <p>Datum</p>
         <p>Bestellnummer</p>
         <p>Artikelanzahl</p>

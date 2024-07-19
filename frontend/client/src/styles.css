@@ -6,14 +6,18 @@
 body{
     background-color: #202020;
     color:#fff;
+    width: 100%;
+    display:table;
     
 }
+
 
 
 
 .container{
     width: 70%;
     margin: 0 auto;
+    
     
        
 }
@@ -30,6 +34,12 @@ body{
     margin: 30px 0 20px 0 ;
     
 }
+
+.carousel-img{
+    width: 80%;
+}
+
+
 
 .header-img{
     
@@ -179,6 +189,10 @@ li{
     color: #fff;
 }
 
+.warenkorb-header{
+    margin: 40px 0 20px 0;
+}
+
 .warenkorb-card, .summary-card{
 
     display: grid;
@@ -201,6 +215,7 @@ li{
     display: grid;
     border: 1px solid grey;
     border-radius: 10px;
+    padding: 20px 0;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(4, 1fr);
     gap:20px 0;
@@ -232,6 +247,18 @@ li{
 
 .userheader{
     font-weight: bold;
+    display: grid;
+    border: 1px solid grey;
+    border-radius: 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px 0;
+    font-size: 17px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    background-color: rgb(114, 110, 110);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0, .5);
 }
 
 .checkbox-warenkorb{
@@ -264,18 +291,37 @@ li{
 }
 
 .footer{
-    margin: 20px 0;
-    
+    margin: 20px 0 ;    
     bottom: 0;
-    text-align: center;
-    
+    text-align: center;   
     width: 100%;
+    
+   
+    
 }
 
 .user-data{
     margin: 20px auto;
     
 }
+
+.usercenter-header{
+    font: 25pt bold;
+}
+
+.delivery-box input{
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    width: 40%;
+}
+
+fieldset{
+    margin:10px 0;
+    padding:10px 0;
+}
+
+
 
 .payment-button{
     padding: 10px;

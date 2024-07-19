@@ -10,7 +10,7 @@ export default function Orderview() {
 
   return (
     <div>
-      <h1> Bestelldatum: {data[0].datum}</h1>
+      <h2> Bestelldatum: {data[0].datum}</h2>
       <h3>Zahlungsmethode: {data[0].zahlungsmethode}</h3>
       <div className="orderview-card">
         <p> </p>
